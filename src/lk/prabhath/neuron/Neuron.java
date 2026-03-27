@@ -45,7 +45,7 @@ public final class Neuron {
     }
 
     public final double activate() {
-        double final_value = 0d;
+        double final_value = 0.00;
         int values_length;
 
         // calculate sigma(wi*xi)
@@ -60,7 +60,7 @@ public final class Neuron {
         values_length = (inputs.length + weights.length) / 2;
 
         for (int i = 0; i < values_length; i++) {
-            final_value = inputs[i] * weights[i];
+            final_value += inputs[i] * weights[i];
         }
 
         return this.activationFunction(
@@ -108,6 +108,10 @@ public final class Neuron {
 
     public final double[] getweights() {
         return this.weights;
+    }
+
+    public final double getBias(){
+        return this.bias;
     }
 
 }

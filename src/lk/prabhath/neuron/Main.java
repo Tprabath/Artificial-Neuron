@@ -7,20 +7,20 @@ public class Main {
             new Neuron(
                     new double[] {
                             Normalization.min_max_normalize(
-                                    20,
+                                    29,
                                     100,
                                     0), // exam
                             Normalization.min_max_normalize(
-                                    1,
+                                    4,
                                     10,
                                     0) // attendence
                     },
                     new double[] {
-                            0.6, // exam weigth
-                            0.1 // attendence weight
+                            0.01, // exam weigth
+                            0.001 // attendence weight
                     },
 
-                    0,
+                    -0.2,
                     ActivationFunction.Sigmoid),
 
     };
@@ -28,16 +28,18 @@ public class Main {
     public static void main(String[] args) {
 
         for (int i = 0; i < Main.neurons.length; i++) {
-            double output = Main.neurons[i].activate();
+            Neuron n = neurons[i];
+            double output = n.activate();
 
             StringBuilder sb = new StringBuilder();
             sb.append("\nNeuron [" + i + "] is activating...");
             sb.append("\n\t - input");
-            sb.append(Main.concat(Main.neurons[i].getInputs()));
+            sb.append(Main.concat(n.getInputs()));
             sb.append("\n\t - weights");
-            sb.append(Main.concat(Main.neurons[i].getweights()));
+            sb.append(Main.concat(n.getweights()));
+            sb.append("\n\t - bias : " + n.getBias());
             sb.append("\n\t - output : " + output);
-            sb.append("\n\t - fire : " + (output >= Main.threshold));
+            sb.append("\n\t - fire : " + (output >= threshold));
 
             System.out.println(sb.toString());
         }
