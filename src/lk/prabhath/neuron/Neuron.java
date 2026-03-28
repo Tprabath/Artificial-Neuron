@@ -63,12 +63,12 @@ public final class Neuron {
             final_value += inputs[i] * weights[i];
         }
 
-        return this.activationFunction(
+        return Neuron.activationFunction(
                 (final_value + this.bias), // add bias inline
                 activationFunction);
     }
 
-    private final double activationFunction(
+    private static final double activationFunction(
             double value,
             ActivationFunction func) {
 
