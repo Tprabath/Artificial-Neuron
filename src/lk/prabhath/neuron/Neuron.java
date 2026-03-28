@@ -38,8 +38,8 @@ public final class Neuron {
             double bias,
             ActivationFunction activationFunction) {
 
-        this.inputs = this.checkpoint(inputs);
-        this.weights = this.checkpoint(weights);
+        this.inputs = Neuron.checkpoint(inputs);
+        this.weights = Neuron.checkpoint(weights);
         this.bias = bias;
         this.activationFunction = activationFunction;
     }
@@ -84,7 +84,7 @@ public final class Neuron {
     }
 
     // check all values lass that 1 and more than 0
-    private final double[] checkpoint(double[] d) {
+    private static final double[] checkpoint(double[] d) {
         for (double v : d) {
             if (v < 0 && 1 < v) {
                 Logging
