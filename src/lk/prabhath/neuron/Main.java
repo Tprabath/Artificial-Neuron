@@ -20,7 +20,8 @@ public class Main {
                             0.1 // attendence weight
                     },
 
-                    -0.2,
+                    -0.7,
+                    0.3,
                     ActivationFunction.Sigmoid),
 
     };

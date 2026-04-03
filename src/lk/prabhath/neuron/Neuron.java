@@ -11,6 +11,10 @@ public final class Neuron {
 
     double bias;
     double[] inputs, weights;
+
+    double expectedOutput;
+    double predict;
+    
     ActivationFunction activationFunction;
 
     public Neuron(
@@ -18,7 +22,7 @@ public final class Neuron {
             double[] weights,
             ActivationFunction activationFunction) {
 
-        this.init(inputs, weights,
+        this(inputs, weights,
                 0, // default 0
                 activationFunction);
 
@@ -27,20 +31,41 @@ public final class Neuron {
     public Neuron(
             double[] inputs,
             double[] weights,
-            double bias,
+            double expectedOutput,
             ActivationFunction activationFunction) {
 
-        this.init(inputs, weights, bias, activationFunction);
+        this(inputs, weights,
+                0, // default 0
+                expectedOutput,
+                activationFunction);
+
+    }
+
+    public Neuron(
+            double[] inputs,
+            double[] weights,
+            double bias,
+            double expectedOutput,
+            ActivationFunction activationFunction) {
+
+        this.init(
+                inputs,
+                weights,
+                bias,
+                expectedOutput,
+                activationFunction);
     }
 
     private final void init(double[] inputs,
             double[] weights,
             double bias,
+            double expectedOutput,
             ActivationFunction activationFunction) {
 
         this.inputs = Neuron.checkpoint(inputs);
         this.weights = Neuron.checkpoint(weights);
         this.bias = bias;
+        this.expectedOutput = expectedOutput;
         this.activationFunction = activationFunction;
     }
 
@@ -63,9 +88,22 @@ public final class Neuron {
             final_value += inputs[i] * weights[i];
         }
 
-        return Neuron.activationFunction(
+        this.predict = Neuron.activationFunction(
                 (final_value + this.bias), // add bias inline
                 activationFunction);
+
+        if (this.expectedOutput != 0) {
+            Logging
+                    .getInstance()
+                    .log(c_name,
+                            "Expected Output : " + this.expectedOutput
+                          + "\nOutput : " + this.predict 
+                          + "\nError Calculate : " + errorCalculate(),
+                            Logging.Status.LOG);
+        }
+
+        return predict;
+
     }
 
     private static final double activationFunction(
@@ -98,6 +136,10 @@ public final class Neuron {
         return d;
     }
 
+    private final double errorCalculate(){
+        return this.expectedOutput - this.predict;
+    }
+
     public final void setBias(double bias) {
         this.bias = bias;
     }
@@ -110,7 +152,7 @@ public final class Neuron {
         return this.weights;
     }
 
-    public final double getBias(){
+    public final double getBias() {
         return this.bias;
     }
 
