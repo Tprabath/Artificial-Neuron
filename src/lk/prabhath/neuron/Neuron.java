@@ -9,12 +9,12 @@ enum ActivationFunction {
 public final class Neuron {
     private static final String c_name = "Neuron";
 
-    double bias;
     double[] inputs, weights;
 
-    double expectedOutput;
-    double predict;
-    
+    double bias,
+            expectedOutput,
+            predict;
+
     ActivationFunction activationFunction;
 
     public Neuron(
@@ -97,8 +97,8 @@ public final class Neuron {
                     .getInstance()
                     .log(c_name,
                             "Expected Output : " + this.expectedOutput
-                          + "\nOutput : " + this.predict 
-                          + "\nError Calculate : " + errorCalculate(),
+                                    + "\nOutput : " + this.predict
+                                    + "\nError Calculate : " + getError(),
                             Logging.Status.LOG);
         }
 
@@ -136,12 +136,8 @@ public final class Neuron {
         return d;
     }
 
-    private final double errorCalculate(){
+    public final double getError() {
         return this.expectedOutput - this.predict;
-    }
-
-    public final void setBias(double bias) {
-        this.bias = bias;
     }
 
     public final double[] getInputs() {
@@ -154,6 +150,14 @@ public final class Neuron {
 
     public final double getBias() {
         return this.bias;
+    }
+
+    public final void setBias(double bias) {
+        this.bias = bias;
+    }
+
+    public final void setWeights(double[] updatedWeights) {
+        this.weights = updatedWeights;
     }
 
 }
