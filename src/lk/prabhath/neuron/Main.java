@@ -33,20 +33,16 @@ public class Main {
             Neuron n = neurons[i];
             // double output = n.activate();
 
-            for (int j = 0; j < 100; j++) {
+            TrainNeuron.trainANeuron(
+                    n,
+                    0.01,
+                    true,
+                    1);
 
-                TrainNeuron.trainNeuron(
-                        n,
-                        n.getError(),
-                        0.01,
-                        true);
+            // double n_output = n.activate();
 
-                double n_output = n.activate();
-
-                System.out.println("Neuron [" + i + "] Output : " + n_output);
-                System.out.println("\n====================");
-
-            }
+            // System.out.println("Neuron [" + i + "] Output : " + n_output);
+            // System.out.println("\n====================");
 
             // StringBuilder sb = new StringBuilder();
             // sb.append("\nNeuron [" + i + "] is activating...");

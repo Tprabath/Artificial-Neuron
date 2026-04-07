@@ -115,30 +115,30 @@ public final class Neuron {
                 (final_value + this.bias), // add bias inline
                 activationFunction);
 
-        if (this.expectedOutput != 0) {
-            Logging
-                    .getInstance()
-                    .log(c_name,
-                            "Expected Output : " + this.expectedOutput
-                                    + "\nOutput : " + this.predict
-                                    + "\nError Calculate : " + getError(),
-                            Logging.Status.LOG);
-        }
+        // if (this.expectedOutput != 0) {
+        //     Logging
+        //             .getInstance()
+        //             .log(c_name,
+        //                     "Expected Output : " + this.expectedOutput
+        //                             + "\nOutput : " + this.predict
+        //                             + "\nError Calculate : " + getError(),
+        //                     Logging.Status.LOG);
+        // }
 
-        if (verbose) {
-            String wights;
-            StringBuilder sb = new StringBuilder();
-            for (int j = 0; j < this.getweights().length; j++) {
-                sb.append("   - weight [" + j + "] : " + this.getweights()[j] + "\n");
-            }
+        // if (verbose) {
+        //     String wights;
+        //     StringBuilder sb = new StringBuilder();
+        //     for (int j = 0; j < this.getweights().length; j++) {
+        //         sb.append("   - weight [" + j + "] : " + this.getweights()[j] + "\n");
+        //     }
 
-            Logging
-                    .getInstance()
-                    .log(c_name,
-                            "Neuron Verbos \n" + sb.toString()
-                                    + "\n - bias : " + this.getBias(),
-                            Logging.Status.LOG);
-        }
+        //     Logging
+        //             .getInstance()
+        //             .log(c_name,
+        //                     "Neuron Verbos \n" + sb.toString()
+        //                             + "\n - bias : " + this.getBias(),
+        //                     Logging.Status.LOG);
+        // }
 
         return predict;
 
@@ -163,11 +163,9 @@ public final class Neuron {
     private static final double[] checkpoint(double[] d) {
         for (double v : d) {
             if (v < 0 && 1 < v) {
-                Logging
-                        .getInstance()
-                        .log(Neuron.c_name,
-                                "inputs or weights less than 1 and more than 0",
-                                Logging.Status.ERROR);
+                Logging.showError(
+                    c_name,
+                    "inputs or weights less than 1 and more than 0");
             }
         }
 

@@ -4,49 +4,61 @@ public class TrainNeuron {
 
     private static final String c_name = "TrainNeuron";
 
-    public static void trainNeuron(Neuron neuron,
+    public static final void trainNeuron(Neuron neuron,
             double error,
-            double learningRate){
+            double learningRate,
+            int trainCount) {
 
-        TrainNeuron.trainNeuron(
-            neuron, 
-            error, 
-            learningRate, 
-            false);
+        TrainNeuron.trainANeuron(
+                neuron,
+                learningRate,
+                false,
+                trainCount);
     }
 
-    public static void trainNeuron(
+    public static final void trainANeuron(
             Neuron neuron,
-            double error,
+            double learningRate,
+            boolean verbose,
+            int trainCount) {
+
+        int j = 0;
+
+        while (j < trainCount) {
+            TrainNeuron.learn(neuron, learningRate, verbose);
+            j++;
+        }
+
+    }
+
+    private static final void learn(
+            Neuron neuron,
             double learningRate,
             boolean verbose) {
 
         int l = (neuron.getInputs().length + neuron.getweights().length) / 2;
         double[] u_w = new double[l];
 
+        double error = neuron.getError();
+
         for (int i = 0; i < l; i++) {
-            u_w[i] = 
-                neuron.getweights()[i] 
-                + (
-                    learningRate 
-                    * error 
-                    * neuron.getInputs()[i]
-                );
-            
-                if(verbose){
-                    Logging
-                        .getInstance()
-                        .log(c_name,
-                            "Weight ["+i+"] is now : " + u_w[i],
-                            Logging.Status.LOG);
-                        
-                }
+            u_w[i] = neuron.getweights()[i]
+                    + (learningRate
+                            * error
+                            * neuron.getInputs()[i]);
+
+         Logging.showState(c_name, verbose, "Weight [" + i + "] is now : " + u_w[i]);
 
         }
 
         neuron.setWeights(u_w);
         neuron.setBias(neuron.getBias() + (learningRate * error));
 
+        Logging.showState("\n"
+            +"Traing is Finish\n"
+            + "\tBias : " + neuron.getBias()
+        );
     }
 
+   
 }
