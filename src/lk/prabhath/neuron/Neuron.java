@@ -19,6 +19,8 @@ public final class Neuron {
 
     ActivationFunction activationFunction;
 
+    public Neuron(){}
+
     public Neuron(
             double[] inputs,
             double[] weights,
@@ -184,6 +186,15 @@ public final class Neuron {
         return this.weights;
     }
 
+    public final String getWeightsAsString(){
+        String o = "";
+        double[] d = this.getweights();
+        for(int i = 0; i < d.length; i++){
+            o += "\t\t - W "+i+ " : " + d[i] + "\n";
+        }
+        return o;
+    }
+
     public final double getBias() {
         return this.bias;
     }
@@ -200,4 +211,11 @@ public final class Neuron {
         this.weights = updatedWeights;
     }
 
+    public final void setInputs(double[] inputs){
+        this.inputs = inputs;
+    }
+
+    public final void setExpectedOutput(double expectedOutput){
+        this.expectedOutput = expectedOutput;
+    }
 }
