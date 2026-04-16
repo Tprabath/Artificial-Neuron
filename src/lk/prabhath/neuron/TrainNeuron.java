@@ -1,5 +1,7 @@
 package lk.prabhath.neuron;
 
+import lk.prabhath.neuron.util.Logging;
+
 public class TrainNeuron {
 
     private static final String c_name = "TrainNeuron";

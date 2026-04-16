@@ -1,8 +1,8 @@
-package lk.prabhath.neuron;
+package lk.prabhath.neuron.util;
 
 public final class Logging {
 
-    static enum Status {
+    public static enum Status {
         LOG,
         ERROR
     }

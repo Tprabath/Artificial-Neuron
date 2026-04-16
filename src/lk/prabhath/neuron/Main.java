@@ -64,16 +64,9 @@ public class Main {
 
         TrainNeuron.trainANeuron(
                 new Neuron(
-                        new double[] {
-                                1,
-                                1,
-                        },
-                        new double[] {
-                                0.5, // exam weigth
-                                0.2, // attendence weight
-                        },
-
-                        -0.1, // bias
+                        new double[]{},
+                        new double[]{},
+                        -1, //bias
                         1,
                         ActivationFunction.Sigmoid,
                         true),

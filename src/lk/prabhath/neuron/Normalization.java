@@ -1,5 +1,7 @@
 package lk.prabhath.neuron;
 
+import lk.prabhath.neuron.util.Logging;
+
 public final class Normalization {
     private static final String c_name = "Normalization";
 

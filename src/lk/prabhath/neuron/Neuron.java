@@ -1,5 +1,7 @@
 package lk.prabhath.neuron;
 
+import lk.prabhath.neuron.util.Logging;
+
 enum ActivationFunction {
     Sigmoid,
     ReLU,
@@ -19,7 +21,12 @@ public final class Neuron {
 
     ActivationFunction activationFunction;
 
-    public Neuron(){}
+    public Neuron(
+        ActivationFunction af,
+        boolean verbose){
+            this.activationFunction = af;
+            this.verbose = verbose;
+        }
 
     public Neuron(
             double[] inputs,
